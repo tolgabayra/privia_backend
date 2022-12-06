@@ -3,18 +3,19 @@ import { useRoutes } from "react-router-dom";
 import Feed from "./pages/Feed";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 
 
 
 
-const ProtectedRoute = () => {
-  const user = useSelector((state)=> state.auth.user)
-  if (!user) {
-    return <Login />
-  }
-  return <Feed />
-}
+// const ProtectedRoute = () => {
+//   const user = useSelector((state)=> state.auth.user)
+//   if (!user) {
+//     return <Login />
+//   }
+//   return <Feed />
+// }
 
 
 
@@ -34,10 +35,12 @@ export default function Routes(){
         },
         {
             path: "/feed",
-            element: <ProtectedRoute />,
-            children: [
-                {path: "", element: <Feed />}
-            ]
+            element: <Feed/>,
+         
+        },
+        {
+            path: "/profile",
+            element: <Profile />
         }
     ])
 }

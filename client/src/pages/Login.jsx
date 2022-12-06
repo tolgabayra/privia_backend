@@ -1,23 +1,50 @@
 import React from 'react'
 import { useState } from 'react'
 import { appAxios } from "../utils/appAxios"
-
+import { login } from '../features/authSlice';
+import { useDispatch } from "react-redux"
+import { useNavigate } from 'react-router-dom';
+import { useToast } from '@chakra-ui/react'
 
 export default function Login() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
 
+  const toast = useToast()
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+
   const submitLogin = () => {
-    appAxios.post("/auth/login",{
+    appAxios.post("api/v1/auth/login",{
       username,
       password
     },{withCredentials: true})
     .then((res) => {
       console.log(res);
+      toast({
+        title: 'Login is successfull',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      })
+      setTimeout(() => {
+        dispatch(login())
+        navigate("/feed")
+    }, 3000)
+    localStorage.setItem("token", res.data.token)
+
     })
     .catch(err=>{
-
+      console.log(err);
+      toast({
+        title: 'Can not login',
+        status: 'warning',
+        duration: 3000,
+        isClosable: true,
+      })
     })
   }
 

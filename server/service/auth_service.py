@@ -6,9 +6,10 @@ import datetime
 
 def signup_service(userdata):
     try:
-        email_check = User.objects[:1](email=userdata['email'])
-        if email_check:
-            return {"status": 404, "message": "email already exists"}
+        username_check = User.objects[:1](username=userdata['username'])
+        print(userdata)
+        if username_check:
+            return {"status": 404, "message": "Username already exists"}
         else:
             username = userdata['username']
             password = encrypt_password(userdata['password'])
@@ -24,11 +25,11 @@ def signup_service(userdata):
 
 def login_service(user_credentials):
     try:
-        email_check = User.objects[:1](email=user_credentials['email'])
-        if not email_check:
-            return {"status": 404, "message": "email does not exists"}
+        username_check = User.objects[:1](username=user_credentials['username'])
+        if not username_check:
+            return {"status": 404, "message": "Username does not exists"}
         else:
-            for user in email_check:
+            for user in username_check:
                 payload = {"email": user['email'], "_id": str(user['id']), 'exp': datetime.datetime.utcnow(
                 ) + datetime.timedelta(minutes=60)}
                 if compare_passwords(user_credentials['password'], user['password']):

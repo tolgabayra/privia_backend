@@ -16,7 +16,7 @@ def delete_topic(topic_id):
 @topic_route.route("/api/v1/topic/<topic_id>", methods=['PUT'])
 def update_topic(topic_id):
     topic_data = request.get_json()
-    return update_topic(topic_id, topic_data)
+    return update_service(topic_id, topic_data)
     
 
 @topic_route.route("/api/v1/topic", methods=['GET'])

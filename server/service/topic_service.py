@@ -1,8 +1,9 @@
 from model.topic import Topic
 from flask import make_response
+from utils.jwt_token import validate_token
 
 
-
+@validate_token
 def create_service(data):
     try:
         title = data['title']
@@ -17,7 +18,7 @@ def create_service(data):
     except Exception as e:
         return make_response({'message': str(e)}, 404)
 
-
+@validate_token
 def delete_service(topic_id):
     try:
         topic = Topic.objects(id=topic_id)

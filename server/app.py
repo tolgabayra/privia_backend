@@ -7,11 +7,12 @@ from mongoengine import connect
 
 from routes.auth import auth_route
 from routes.topic import topic_route
-
+from routes.comment import comment_route
 
 app = Flask(__name__)
 app.register_blueprint(auth_route)
 app.register_blueprint(topic_route)
+app.register_blueprint(comment_route)
 
 
 

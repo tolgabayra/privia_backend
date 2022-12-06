@@ -9,17 +9,17 @@ import Register from "./pages/Register";
 
 
 
-// const ProtectedRoute = () => {
-//   const user = useSelector((state)=> state.auth.user)
-//   if (!user) {
-//     return <Login />
-//   }
-//   return <Feed />
-// }
+const ProtectedRoute = () => {
+    const user = useSelector((state) => state.auth.user)
+    if (!user) {
+        return <Login />
+    }
+    return <Feed />
+}
 
 
 
-export default function Routes(){
+export default function Routes() {
     return useRoutes([
         {
             path: "/",
@@ -35,12 +35,12 @@ export default function Routes(){
         },
         {
             path: "/feed",
-            element: <Feed/>,
+            element: <ProtectedRoute />,
+            children: [
+                { path: "", element: <Feed /> },
+                { path: "profile", element: <Profile />}
+            ]
          
-        },
-        {
-            path: "/profile",
-            element: <Profile />
         }
     ])
 }

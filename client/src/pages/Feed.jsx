@@ -13,8 +13,13 @@ import {
 } from '@chakra-ui/react'
 import { useDispatch } from "react-redux"
 import { logout } from '../features/authSlice';
+import { useState } from 'react'
 
 export default function Feed() {
+
+    const [topics, setTopics] = useState([])
+
+
     const { isOpen, onOpen, onClose } = useDisclosure()
     const navigate = useNavigate()
     const toast = useToast()
@@ -85,6 +90,15 @@ export default function Feed() {
                             <h1 className="text-xl font-semibold">Questions</h1>
                             <button onClick={onOpen}  className="flex items-center h-8 px-2 text-sm bg-green-300 rounded-lg hover:bg-green-200">Create Topic</button>
                         </div>
+
+
+
+
+                       
+
+
+
+
                         <div className="flex-grow h-0 overflow-auto">
                             <div className="bg-green-50 shadow rounded-lg pb-4">
                                 <div className="flex flex-row px-2 py-3 mx-3">
@@ -143,6 +157,11 @@ export default function Feed() {
                                 </div>
                             </div>
                         </div>
+
+
+
+
+
                     </div>
                     <div className="flex flex-col flex-shrink-0 w-1/6 py-4 pl-5">
                         Trends

@@ -6,10 +6,13 @@ from flask import Flask
 from mongoengine import connect
 
 from routes.auth import auth_route
+from routes.topic import topic_route
 
 
 app = Flask(__name__)
 app.register_blueprint(auth_route)
+app.register_blueprint(topic_route)
+
 
 
 CORS(app)

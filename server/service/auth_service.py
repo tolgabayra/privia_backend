@@ -11,7 +11,7 @@ def signup_service(userdata):
             return {"status": 404, "message": "email already exists"}
         else:
             username = userdata['username']
-            password = userdata['password']
+            password = encrypt_password(userdata['password'])
 
             new_user = User(username=username, password=password)
 

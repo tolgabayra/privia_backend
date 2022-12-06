@@ -30,12 +30,15 @@ def login_service(user_credentials):
             return {"status": 404, "message": "Username does not exists"}
         else:
             for user in username_check:
-                payload = {"email": user['email'], "_id": str(user['id']), 'exp': datetime.datetime.utcnow(
+                payload = {"username": user['username'], "_id": str(user['id']), 'exp': datetime.datetime.utcnow(
                 ) + datetime.timedelta(minutes=60)}
                 if compare_passwords(user_credentials['password'], user['password']):
                     token = generate_token(payload, "SecretKey")
-                    return make_response({'token': token}, 200)
+                    result = make_response({'token': token}, 200)
+                    result.set_cookie('token', token, httponly=True)
+                    return result
                 else:
                     return make_response({'message': 'Invalid password'}, 403)
     except Exception as e:
+        print(e)
         return make_response({'message': str(e)}, 404)

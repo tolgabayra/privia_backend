@@ -22,14 +22,15 @@ export default function Feed() {
 
 
     const submitLogout = () => {
-      localStorage.clear()
-      setTimeout(() => {
         toast({
             title: 'Log out is successfull',
             status: 'success',
             duration: 3000,
             isClosable: true,
           })
+      localStorage.clear()
+      setTimeout(() => {
+        
         navigate("/login")
         dispatch(logout())
 

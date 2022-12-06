@@ -1,10 +1,16 @@
+import { useToast } from '@chakra-ui/react'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { appAxios } from '../utils/appAxios'
 
 export default function Register() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
+
+
+  const toast = useToast()
+  const navigate = useNavigate()
 
   const submitRegister = () => {
     appAxios.post("auth/register", {
@@ -13,9 +19,24 @@ export default function Register() {
     }, { withCredentials: true })
       .then((res) => {
         console.log(res);
+        toast({
+          title: 'Created account',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        })
+        setTimeout(() => {
+          navigate("/login")
+        },200)
       })
       .catch(err => {
         console.log(err);
+        toast({
+          title: 'Not Created account',
+          status: 'warning',
+          duration: 3000,
+          isClosable: true,
+        })
       })
   }
 

@@ -16,7 +16,7 @@ app.register_blueprint(comment_route)
 
 
 
-CORS(app)
+CORS(app, supports_credentials=True)
 load_dotenv()
 
 connect(username='root', password='root', db='mongodb')

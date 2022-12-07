@@ -68,5 +68,21 @@ def list_service(user_id):
             return make_response({'message' : 'You can not view'},403)   
 
 
+def list_all_service():
+    topics = []
+    try:
+        for topic in Topic.objects:
+            topic_data = {}
+            topic_data['_id'] = str(topic.id)
+            topic_data['title'] = str(topic.title)
+            topic_data['desc'] = str(topic.desc)
+            topics.append(topic_data)
+
+        return {"topics": topics}
+    except Exception as e:
+        return make_response({'message' : str(e)}, 404)  
+
+
+
        
     

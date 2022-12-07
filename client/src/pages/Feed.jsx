@@ -14,6 +14,8 @@ import {
 import { useDispatch } from "react-redux"
 import { logout } from '../features/authSlice';
 import { useState } from 'react'
+import { useEffect } from 'react'
+import { appAxios } from '../utils/appAxios'
 
 export default function Feed() {
 
@@ -24,6 +26,24 @@ export default function Feed() {
     const navigate = useNavigate()
     const toast = useToast()
     const dispatch = useDispatch()
+
+
+
+    useEffect(() => {
+      appAxios.get("/api/v1/topic",{withCredentials: true})
+      .then((res) => {
+        console.log(res);
+      })
+      .catch(err=>console.log(err))
+    },[])
+
+
+
+
+
+
+
+
 
 
     const submitLogout = () => {

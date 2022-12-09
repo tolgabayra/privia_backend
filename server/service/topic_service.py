@@ -7,7 +7,7 @@ from utils.jwt_token import validate_token
 def create_service(data):
     try:
         title = data['title']
-        desc = data['dsc']
+        desc = data['desc']
         user_id = data['user_id']
 
         new_topic = Topic(title=title, desc=desc, user_id=user_id)
